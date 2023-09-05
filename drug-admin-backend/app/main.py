@@ -1,7 +1,10 @@
 from fastapi import FastAPI 
+from app.routes import router
 
 app = FastAPI() 
 
-@app.get("/test")
-def test(): 
-    return {"Hello": "Mars"}
+@app.get("/")
+def root():
+    return {"message": "Drug Admin API"}
+
+app.include_router(router)
