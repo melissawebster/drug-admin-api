@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class DrugResponse(BaseModel):
+class DrugResponse(BaseModel, from_attributes=True):
     name: str
     price: float
     stock: int

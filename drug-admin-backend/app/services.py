@@ -7,7 +7,7 @@ from app.db.models import Drug
 
 class DrugService:
 
-    def create(self, drug_create: DrugCreate) -> DrugResponse:
+    async def create(self, drug_create: DrugCreate) -> DrugResponse:
         """
         Creates a drug.
 
