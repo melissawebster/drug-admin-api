@@ -1,17 +1,18 @@
 from pydantic import BaseModel
 
 
-class DrugResponse(BaseModel, from_attributes=True):
+class DrugResponse(BaseModel):
     name: str
     price: float
     stock: int
 
-    class ConfigDict:
+    class Config:
+        from_attributes=True
         json_schema_extra = {
             "example": {
                 "name": "Piroxicam",
                 "price": 20,
-                "stock": "50"
+                "stock": 50
             }
         }
 
@@ -21,11 +22,12 @@ class DrugCreate(BaseModel):
     price: float
     stock: int
 
-    class ConfigDict:
+    class Config:
+        from_attributes=True
         json_schema_extra = {
             "example": {
-                "name": "Piroxicam",
-                "price": 20,
-                "stock": "50"
+                "name": "Vitex",
+                "price": 30,
+                "stock": 20
             }
         }
