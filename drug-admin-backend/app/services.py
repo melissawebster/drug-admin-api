@@ -1,25 +1,15 @@
-#Schemas
+from typing import List
+
+# Schemas
 from app.schemas import DrugCreate
 from app.schemas import DrugResponse
 
-#Models
+# DB
 from app.db.models import Drug
+import app.db.repository as repo
+
 
 class DrugService:
+    pass
+    
 
-    async def create(self, drug_create: DrugCreate) -> DrugResponse:
-        """
-        Creates a drug.
-
-        Args:
-            drug_create (DrugCreate): The drug creation model.
-
-        Returns:  
-            DrugResponse: The response model.
-        """
-
-        drug_to_create = Drug(
-            **drug_create.model_dump()
-        )
-
-        return DrugResponse.model_validate(drug_to_create)
