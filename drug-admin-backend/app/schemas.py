@@ -4,7 +4,7 @@ from pydantic import BaseModel
 class DrugResponse(BaseModel):
     name: str
     price: float
-    stock: int
+    stock: bool
 
     class Config:
         from_attributes=True
@@ -12,7 +12,7 @@ class DrugResponse(BaseModel):
             "example": {
                 "name": "Piroxicam",
                 "price": 20,
-                "stock": 50
+                "stock": True
             }
         }
 
@@ -20,7 +20,7 @@ class DrugResponse(BaseModel):
 class DrugCreate(BaseModel):
     name: str
     price: float
-    stock: int
+    stock: bool
 
     class Config:
         from_attributes=True
@@ -28,6 +28,6 @@ class DrugCreate(BaseModel):
             "example": {
                 "name": "Vitex",
                 "price": 30,
-                "stock": 20
+                "stock": True
             }
         }
