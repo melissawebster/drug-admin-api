@@ -5,10 +5,10 @@ DATABASE_URL = "sqlite:///app/db/database"
 
 Engine = create_engine(DATABASE_URL)
 
-Session = sessionmaker(bind=Engine)
+SessionLocal = sessionmaker(bind=Engine)
 
 def get_db():
-    db = Session()
+    db = SessionLocal()
     try:
         yield db
     finally:
