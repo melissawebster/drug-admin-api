@@ -12,14 +12,3 @@ class Drug(Base):
     name = Column(String, nullable=False)
     price = Column(Float, nullable=False)
     stock = Column(Boolean, nullable=False)
-
-    def insert(self) -> Self:
-        """
-        Use only for insert operation
-        """
-        session = SessionLocal()
-        try:
-            session.add(self)
-            session.commit()
-        finally:
-            session.close()
