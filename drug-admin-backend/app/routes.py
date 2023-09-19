@@ -1,27 +1,42 @@
+#FastAPI
 from fastapi import APIRouter
 from fastapi import Depends
 from fastapi import Query
 
+#Database-related
+from sqlalchemy.orm import Session
+from .db.connection import get_db
+from .db.models import Drug
+
+#Repository
+from .db.repository import repo_get_all
+from .db.repository import repo_get_by_id
+
+#Typing
 from typing import Annotated
 from typing import List
 
-from sqlalchemy.orm import Session
-from.db.connection import get_db
-from .db.models import Drug
-from .db.repository import get_by_name
-
-#Schemas and Service
-from app.services import DrugService
-from app.schemas import DrugResponse
-from app.schemas import DrugCreate
-
 
 router = APIRouter(tags=['Drugs'])
-drug_service = DrugService()
 
+
+@router.get('/drugs/{id}')
+def get_by_id(id: int,
+              db: Session = Depends(get_db)):
+    """
+    Gets a drug by id
+
+    Args:
+        id (int): the id to query
+
+    Returns:
+        A drug or none
+    """
+    result = repo_get_by_id(id, db)
+    return result
 
 @router.get('/drugs')
-def get_drugs(name: Annotated [str | None, Query(max_lenght=50)] = None, 
+def get_all(name: Annotated [str | None, Query(max_lenght=50)] = None, 
               db: Session = Depends(get_db)):
     """
     Gets all drugs
@@ -34,6 +49,6 @@ def get_drugs(name: Annotated [str | None, Query(max_lenght=50)] = None,
         A list of drugs
 
     """    
-    drugs = get_by_name(name, db)
-    return drugs
+    result = repo_get_all(name, db)
+    return result
 

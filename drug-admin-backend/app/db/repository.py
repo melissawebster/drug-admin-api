@@ -12,11 +12,14 @@ from .connection import get_db
 from .models import Drug
 
 
-def get_all(db: Session):
+
+def repo_get_all(db: Session):
     return db.query(Drug).all()
 
-
-def get_by_name(name: str, db: Session):
+def repo_get_by_name(name: str, db: Session):
     if not name:
-        return get_all(db)
+        return repo_get_all(db)
     return db.query(Drug).filter(Drug.name.ilike(f"%{name}%")).all()
+
+def repo_get_by_id(id: int, db: Session):
+    return db.query(Drug).filter(Drug.id == id).one_or_none()
