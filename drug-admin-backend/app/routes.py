@@ -13,12 +13,37 @@ from .db.repository import repo_get_all_by_name
 from .db.repository import repo_get_by_id
 from .db.repository import repo_delete_by_id
 
+#Schemas
+from .schemas import DrugResponse
+from .schemas import DrugCreate
+
 #Typing
 from typing import Annotated
 from typing import List
 
 
 router = APIRouter(tags=['Drugs'])
+
+@router.post('/drugs')
+def create(drug: DrugCreate,
+           db: Session = Depends(get_db)) -> DrugResponse:
+    """
+    Creates a drug
+
+    Args:
+        name (str): the drug name
+        price (float): the drug price
+        stock (bool): if drug is in stock
+        db (Session): the database session
+    """
+    drug_to_create = Drug(
+        **drug.model_dump()
+    )
+
+    db.add(drug_to_create)
+    db.commit()
+
+    return DrugResponse.model_validate(drug_to_create)
 
 
 @router.get('/drugs/{id}')
@@ -29,6 +54,7 @@ def get_by_id(id: int,
 
     Args:
         id (int): the id to query
+        db (Session): the database session
 
     Returns:
         A drug or none
