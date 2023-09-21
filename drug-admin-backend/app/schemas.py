@@ -31,3 +31,19 @@ class DrugCreate(BaseModel):
                 "stock": True
             }
         }
+
+
+class DrugUpdate(BaseModel):
+    name: str
+    price: float
+    stock: bool
+
+    class Config:
+        from_attributes=True
+        json_schema_extra = {
+            "example": {
+                "name": "Tandrilax",
+                "price": 10,
+                "stock": False
+            }
+        }
