@@ -1,0 +1,3 @@
+
+class ResourceNotFound(Exception):
+    pass
