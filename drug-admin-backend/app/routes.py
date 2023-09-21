@@ -1,35 +1,33 @@
 #FastAPI
 from fastapi import APIRouter
+from fastapi import HTTPException
 from fastapi import Depends
 from fastapi import Query
 
 #Database-related
 from sqlalchemy.orm import Session
 from .db.connection import get_db
-from .db.models import Drug
 
-#Repository
-from .db.repository import repo_get_all_by_name
-from .db.repository import repo_get_by_id
-from .db.repository import repo_delete_by_id
-from .db.repository import repo_update
-
-#Schemas
+#Schemas and Services
 from .schemas import DrugResponse
 from .schemas import DrugUpdate
 from .schemas import DrugCreate
+from .services import DrugService
+
+#Exceptions
+from .utils.exceptions import ResourceNotFound
 
 #Typing
 from typing import Annotated
-from typing import List
 
 
 router = APIRouter(tags=['Drugs'])
+services = DrugService()
 
 
 @router.post('/drugs')
 def create(drug: DrugCreate,
-           db: Session = Depends(get_db)) -> DrugResponse:
+           db: Session = Depends(get_db)):
     """
     Creates a drug
 
@@ -39,20 +37,15 @@ def create(drug: DrugCreate,
         stock (bool): if drug is in stock
         db (Session): the database session
     """
-    drug_to_create = Drug(
-        **drug.model_dump()
-    )
 
-    db.add(drug_to_create)
-    db.commit()
-
-    return DrugResponse.model_validate(drug_to_create)
+    create = services.create(drug, db)
+    return create
 
 
 @router.patch('/drugs/{id}')
 def update(id: int,
            drug: DrugUpdate,
-           db: Session = Depends(get_db)) -> DrugResponse:
+           db: Session = Depends(get_db)):
     """
     Updates a drug
 
@@ -62,11 +55,12 @@ def update(id: int,
         stock (bool): if drug is in stock
         db (Session): the database session
     """
-    drug_update = drug.model_dump()
-
-    result = repo_update(id, drug_update, db)
-    if result == True:
-        return DrugResponse.model_validate(drug)
+    try:
+        update = services.update(id, drug, db)
+        return update
+    except ResourceNotFound:
+        raise HTTPException(status_code=404, 
+                            detail="Drug not found")
 
 
 @router.get('/drugs/{id}')
@@ -82,13 +76,17 @@ def get_by_id(id: int,
     Returns:
         A drug or none
     """
-    result = repo_get_by_id(id, db)
-    return result
+    try:
+        get = services.get_by_id(id, db)
+        return get
+    except ResourceNotFound:
+        raise HTTPException(status_code=404, 
+                            detail="Drug not found")
 
 
 @router.get('/drugs')
 def get_all_by_name(name: Annotated [str | None, Query(max_lenght=50)] = None, 
-              db: Session = Depends(get_db)):
+                    db: Session = Depends(get_db)):
     """
     Gets all drugs
 
@@ -100,8 +98,12 @@ def get_all_by_name(name: Annotated [str | None, Query(max_lenght=50)] = None,
         A list of drugs
 
     """    
-    result = repo_get_all_by_name(name, db)
-    return result
+    try:
+        get = services.get_all(name, db)
+        return get
+    except ResourceNotFound:
+        raise HTTPException(status_code=404, 
+                            detail="Drug not found")
 
 
 @router.delete('/drugs/{id}')
@@ -115,5 +117,9 @@ def delete_by_id(id: int,
         db (Session): the database session
 
     """
-    result = repo_delete_by_id(id, db)
-    return result
+    try:
+        delete = services.delete(id, db)
+        return delete
+    except ResourceNotFound:
+        raise HTTPException(status_code=404, 
+                            detail="Drug not found")
