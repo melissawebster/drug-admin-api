@@ -16,8 +16,8 @@ function SearchBar () {
               <div className="col-8 mx-auto d-flex">
                   <input type="text" className="text-input" placeholder=" Type here..." />
                   <button className="button mx-3">Go</button>
-                  <p>or</p>
-                  <button className="button mx-3">Get all</button>
+                  <span>or</span>
+                  <button className="button mx-3">Get&nbsp;all</button>
               </div>
             </div>
 
