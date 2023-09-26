@@ -1,20 +1,13 @@
-import axios from "axios"
-import { useState } from "react"
+import Header from './components/header/Header'
 import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
 
-  function requestAxios () {
-    axios
-      .get("http://127.0.0.1:8000/")
-  }
-
   return (
     <>
       <div>
-        <button onClick={requestAxios}>ola</button>
+        <Header />
       </div>
 
     </>
