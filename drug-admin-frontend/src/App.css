@@ -3,3 +3,8 @@ html, body {
     width: 100%;
     background-image: linear-gradient(90deg, #7183e5, #9faeff);
   }
+
+a {
+  color: #FFF;
+  text-decoration: none;
+}

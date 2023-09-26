@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Jost');
+
+.footer {
+    background-color: #6373CD;
+    height: 75px;
+    color: #FFF;
+    font-family: Jost;
+    font-size: 14px;
+}
+
+p {
+    margin-top: 0px;
+}
