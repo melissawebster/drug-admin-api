@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Jost');
+
+.search-bar {
+    color: #FFF;
+    font-family: Jost;
+}
+
+.text-input {
+    width: 30vw;
+    border-radius: 5px;
+}
+
+.button {
+    background-color: #fe4a4b;
+    color: #FFF;
+    font-family: Jost;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+p {
+    margin-top: 12px;
+}
