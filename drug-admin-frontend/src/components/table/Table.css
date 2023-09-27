@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Jost');
+
+.table-content {
+    border-collapse: collapse;
+    font-family: Jost;
+    background-color: #FFF;
+    border-radius: 4px;
+}
+
+.table-content thead tr {
+    background-color: #7283DC;
+    font-style: normal;
+    color: #FFF;
+}
+
+.table-content th {
+    padding: 10px;
+}
+
+.table-content td {
+    padding: 5px 0 5px 10px;
+}
+
+.icon-table {
+    width: 20px;
+    margin-left: 5px;
+}

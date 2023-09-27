@@ -1,6 +1,8 @@
 import Header from './components/header/Header'
-import Footer from './components/footer/Footer'
 import SearchBar from './components/search-bar/SearchBar'
+import Table from './components/table/Table'
+import Footer from './components/footer/Footer'
+
 import './App.css'
 
 
@@ -10,6 +12,7 @@ function App() {
       <div>
         <Header />
         <SearchBar />
+        <Table />
         <Footer />
       </div>
 

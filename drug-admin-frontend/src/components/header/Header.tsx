@@ -9,7 +9,7 @@ function Header () {
             <div className="row">
               <div className="col-8 mx-auto d-flex">
                   <img src={logo} alt="logo" className="logo"/>
-                  <div className="title">Drug Admin</div>
+                  <div className="title">Drug&nbsp;Admin</div>
               </div>
             </div>
           </div>
