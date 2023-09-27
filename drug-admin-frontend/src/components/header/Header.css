@@ -4,12 +4,12 @@
 
 .header {
     background-color: #6373CD;
-    height: 75px;
+    height: 85px;
 }
 
 .logo {
     height: 60px;
-    margin-top: 7px;
+    margin-top: 14px;
 }
 
 .title {
@@ -17,6 +17,7 @@
     font-family: Jost;
     font-size: 48px;
     margin-left: 15px;
+    margin-top: 7px;
 }
 
 

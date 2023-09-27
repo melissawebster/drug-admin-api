@@ -6,7 +6,7 @@ function Footer () {
         <>
           <div className="footer container-fluid fixed-bottom">
             <div className="row">
-                <div className="col-8 mx-auto p-2">
+                <div className="col-8 mx-auto pt-3">
                 Developed by Melissa Webster
                 <br />
                 GitHub: <a href="https://github.com/melissawebster/" target="_blank">@melissawebster</a>
