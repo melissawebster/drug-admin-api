@@ -35,18 +35,6 @@ interface TableProps {
                                     </td>
                                 </tr>
                             ))}
-
-
-
-                            {/* <tr>
-                                <td>Vitex</td>
-                                <td>R$33,50</td>
-                                <td>Yes</td>
-                                <td>
-                                    <img src={edit} alt="Edit" className="icon-table" />
-                                    <img src={remove} alt="Remove" className="icon-table" />
-                                </td>
-                            </tr> */}
                         </tbody>
                     </table>
                 </div>
