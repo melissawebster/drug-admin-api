@@ -4,7 +4,8 @@
     border-collapse: collapse;
     font-family: Jost;
     background-color: #FFF;
-    border-radius: 4px;
+    margin-left: -6px;
+
 }
 
 .table-content thead tr {
@@ -19,6 +20,7 @@
 
 .table-content td {
     padding: 5px 0 5px 10px;
+    color: #444444;
 }
 
 .icon-table {
