@@ -9,8 +9,9 @@ from .db.connection import get_db
 from sqlalchemy.orm import Session
 
 #Repository
-from .db.repository import repo_get_all_by_name
+from .db.repository import repo_get_all
 from .db.repository import repo_get_by_id
+from .db.repository import repo_get_by_name
 from .db.repository import repo_delete_by_id
 from .db.repository import repo_update
 
@@ -59,12 +60,17 @@ class DrugService:
         result = repo_get_by_id(id, db)
         return result
     
+    def get_by_name(self,
+            name: str="",
+            db: Session = Depends(get_db)) -> List[DrugResponse]:
+    
+        result = repo_get_by_name(name, db)
+        return result
 
-    def get_all(self,
-                name: Annotated [str | None, Query(max_lenght=50)] = None, 
+    def get_all(self, 
                 db: Session = Depends(get_db)) -> List[DrugResponse]:
         
-        result = repo_get_all_by_name(name, db)
+        result = repo_get_all(db)
         return result
     
 

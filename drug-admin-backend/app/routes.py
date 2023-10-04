@@ -25,45 +25,43 @@ router = APIRouter(tags=['Drugs'])
 services = DrugService()
 
 
-@router.post('/drugs')
-def create(drug: DrugCreate,
-           db: Session = Depends(get_db)):
+@router.get('/drugs/')
+def get_all(db: Session = Depends(get_db)):
     """
-    Creates a drug
+    Gets all drugs
 
     Args:
-        name (str): the drug name
-        price (float): the drug price
-        stock (bool): if drug is in stock
         db (Session): the database session
+
+    Returns:
+        A list of drugs
+
+    """    
+    get = services.get_all(db)
+    return get
+
+@router.get('/drugs/get_by_name/{name}')
+def get_by_name(name: str="", 
+                db: Session = Depends(get_db)):
     """
-
-    create = services.create(drug, db)
-    return create
-
-
-@router.patch('/drugs/{id}')
-def update(id: int,
-           drug: DrugUpdate,
-           db: Session = Depends(get_db)):
-    """
-    Updates a drug
+    Gets drugs by name.
 
     Args:
-        name (str): the drug name
-        price (float): the drug price
-        stock (bool): if drug is in stock
+        name: the name to filter the search (optional)
         db (Session): the database session
-    """
+
+    Returns:
+        A list of drugs
+
+    """    
     try:
-        update = services.update(id, drug, db)
-        return update
+        get = services.get_by_name(name, db)
+        return get
     except ResourceNotFound:
         raise HTTPException(status_code=404, 
                             detail="Drug not found")
 
-
-@router.get('/drugs/{id}')
+@router.get('/drugs/get_by_id/{id}')
 def get_by_id(id: int,
               db: Session = Depends(get_db)):
     """
@@ -83,30 +81,43 @@ def get_by_id(id: int,
         raise HTTPException(status_code=404, 
                             detail="Drug not found")
 
-
-@router.get('/drugs')
-def get_all_by_name(name: Annotated [str | None, Query(max_lenght=50)] = None, 
-                    db: Session = Depends(get_db)):
+@router.post('/drugs/post')
+def create(drug: DrugCreate,
+           db: Session = Depends(get_db)):
     """
-    Gets all drugs
+    Creates a drug
 
     Args:
-        name (str | None): the name to filter the search (optional)
+        name (str): the drug name
+        price (float): the drug price
+        stock (bool): if drug is in stock
         db (Session): the database session
+    """
 
-    Returns:
-        A list of drugs
+    create = services.create(drug, db)
+    return create
 
-    """    
+@router.patch('/drugs/update/{id}')
+def update(id: int,
+           drug: DrugUpdate,
+           db: Session = Depends(get_db)):
+    """
+    Updates a drug
+
+    Args:
+        name (str): the drug name
+        price (float): the drug price
+        stock (bool): if drug is in stock
+        db (Session): the database session
+    """
     try:
-        get = services.get_all(name, db)
-        return get
+        update = services.update(id, drug, db)
+        return update
     except ResourceNotFound:
         raise HTTPException(status_code=404, 
                             detail="Drug not found")
 
-
-@router.delete('/drugs/{id}')
+@router.delete('/drugs/delete/{id}')
 def delete_by_id(id: int,
                  db: Session = Depends(get_db)):
     """

@@ -17,8 +17,8 @@ def repo_get_all(db: Session = Depends(get_db)):
     return db.query(Drug).all()
 
 
-def repo_get_all_by_name(name: str, db: Session = Depends(get_db)):
-    if not name:
+def repo_get_by_name(name: str, db: Session = Depends(get_db)):
+    if name == '':
         return repo_get_all(db)
     return db.query(Drug).filter(Drug.name.ilike(f"%{name}%")).all()
 
