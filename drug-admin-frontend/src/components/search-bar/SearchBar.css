@@ -14,8 +14,16 @@
     background-color: #fe4a4b;
     color: #FFF;
     font-family: Jost;
-    padding: 10px;
+    padding: 7px;
     border-radius: 5px;
+}
+
+.form {
+    background-color: #6373cd;
+}
+
+.form-button {
+    border-radius: 5px;  
 }
 
 span {
