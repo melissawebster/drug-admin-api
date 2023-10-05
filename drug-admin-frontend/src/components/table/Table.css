@@ -27,3 +27,11 @@
     width: 20px;
     margin-left: 5px;
 }
+
+.icon-table:hover {
+    cursor: pointer;
+}
+
+tfoot {
+    background-color: #7283DC;
+}
