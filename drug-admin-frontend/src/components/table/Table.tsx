@@ -17,17 +17,17 @@ interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({ data }) => {
-    const [showModal, setShowModal] = useState(false)
+    const [showDelModal, setShowDelModal] = useState(false)
     const [itemIdToDelete, setItemIdToDelete] = useState<number | null>(null)
 
-    const openModal = (id: number) => {
+    const openDelModal = (id: number) => {
         setItemIdToDelete(id);
-        setShowModal(true);
+        setShowDelModal(true);
     }
 
-    const closeModal = () => {
+    const closeDelModal = () => {
         setItemIdToDelete(null);
-        setShowModal(false);
+        setShowDelModal(false);
     }
 
     const removeItem = (id: number) => {
@@ -35,7 +35,7 @@ const Table: React.FC<TableProps> = ({ data }) => {
         axios.delete(`http://127.0.0.1:8000/drugs/delete/${id}`)
             .then(response => {
                 console.log('Item removido com sucesso', response.data)
-                closeModal()
+                closeDelModal()
                 window.location.href = '/'
             })
             .catch(error => {
@@ -45,13 +45,13 @@ const Table: React.FC<TableProps> = ({ data }) => {
 
     return (
         <>
-            {showModal && (
+            {showDelModal && (
                 <ConfirmModal
                     message = "Tem certeza que deseja excluir este item?"
                     onConfirm = {() => {
                         removeItem(itemIdToDelete!)
                     }}
-                    onCancel={closeModal}
+                    onCancel={closeDelModal}
                 />
             )}
 
@@ -83,7 +83,7 @@ const Table: React.FC<TableProps> = ({ data }) => {
                                                 alt="Remove"
                                                 title="Remove"  
                                                 className="icon-table" 
-                                                onClick={() => openModal(item.id)}
+                                                onClick={() => openDelModal(item.id)}
                                             />
                                         </td>
                                     </tr>
