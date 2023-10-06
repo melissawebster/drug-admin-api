@@ -8,6 +8,7 @@
 .text-input {
     width: 45vw;
     border-radius: 5px;
+    border: none;
 }
 
 .button {
@@ -16,6 +17,7 @@
     font-family: Jost;
     padding: 7px;
     border-radius: 5px;
+    border: none;
 }
 
 .form {
