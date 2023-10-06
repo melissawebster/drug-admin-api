@@ -87,7 +87,7 @@ function SearchBar () {
           </div>
         )}
 
-        <Table data={data} />
+      {data.length > 0 && <Table data={data} />}
       </div>
     </>
   );
