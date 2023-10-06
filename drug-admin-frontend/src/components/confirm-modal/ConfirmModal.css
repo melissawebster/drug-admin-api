@@ -24,4 +24,5 @@
 .modal-content button {
     margin: 6px;
     color: rgb(61, 61, 61);
+    border: none;
 }
