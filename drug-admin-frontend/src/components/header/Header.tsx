@@ -1,5 +1,5 @@
-import logo from '../../assets/logo.png';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from '../../assets/logo.png'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './Header.css'
 
 function Header () {

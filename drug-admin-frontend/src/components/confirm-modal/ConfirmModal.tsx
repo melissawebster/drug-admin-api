@@ -1,9 +1,9 @@
 import './ConfirmModal.css'
 
 interface ConfirmModalProps {
-    message: string;
-    onConfirm: () => void;
-    onCancel: () => void;
+    message: string
+    onConfirm: () => void
+    onCancel: () => void
 }
 
 const ConfirmModal: React.FC<ConfirmModalProps> = ({ message, onConfirm, onCancel }) => {
@@ -12,12 +12,12 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({ message, onConfirm, onCance
             <div className="modal-box">
                 <div className="modal-content">
                     <p>{message}</p>
-                    <button onClick={onConfirm}>Sim</button>
-                    <button onClick={onCancel}>Cancelar</button>
+                    <button onClick={onConfirm}>Yes</button>
+                    <button onClick={onCancel}>Cancel</button>
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
-export default ConfirmModal;
+export default ConfirmModal

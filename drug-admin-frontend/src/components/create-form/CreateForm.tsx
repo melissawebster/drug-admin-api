@@ -2,26 +2,27 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../search-bar/SearchBar.css'
 
-import React, { useState } from 'react';
+//Other Imports
+import { useState } from 'react'
 
 interface CreateDrugFormProps {
-  onSubmit: (formData: any) => void;
+  onSubmit: (formData: any) => void
 }
 
 const CreateForm: React.FC<CreateDrugFormProps> = ({ onSubmit }) => {
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [inStock, setInStock] = useState(false);
+  const [name, setName] = useState('')
+  const [price, setPrice] = useState('')
+  const [inStock, setInStock] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     const formData = {
       name,
       price: parseFloat(price),
       stock: inStock
-    };
-    onSubmit(formData);
-  };
+    }
+    onSubmit(formData)
+  }
 
   return (
     <form className="mt-3 p-3 form" onSubmit={handleSubmit}>
@@ -55,7 +56,7 @@ const CreateForm: React.FC<CreateDrugFormProps> = ({ onSubmit }) => {
       <button className="form-button" 
               type="submit">Submit</button>
     </form>
-  );
-};
+  )
+}
 
-export default CreateForm;
+export default CreateForm

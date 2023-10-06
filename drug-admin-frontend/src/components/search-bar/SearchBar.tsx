@@ -15,7 +15,7 @@ function SearchBar () {
 
   const [name, setName] = useState('')
   const [data, setData] = useState<any[]>([])
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(false)
 
   const fetchDataByName = () => {
     axios.get(`http://127.0.0.1:8000/drugs/get_by_name/${name}`)
@@ -30,21 +30,21 @@ function SearchBar () {
   }
 
   const handleAddNew = () => {
-    setShowForm(true);
-  };
+    setShowForm(true)
+  }
 
   const handleCloseForm = () => {
-    setShowForm(false);
-  };
+    setShowForm(false)
+  }
 
   const handleFormSubmit = (formData: any) => {
     axios.post('http://127.0.0.1:8000/drugs/post', formData)
       .then(res => {
-        setData([...data, res.data]);
-        setShowForm(false);
+        setData([...data, res.data])
+        setShowForm(false)
       })
-      .catch(err => console.log(err));
-  };
+      .catch(err => console.log(err))
+  }
 
   return (
     <>
@@ -90,7 +90,7 @@ function SearchBar () {
       {data.length > 0 && <Table data={data} />}
       </div>
     </>
-  );
+  )
 }
 
 export default SearchBar

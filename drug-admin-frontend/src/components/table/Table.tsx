@@ -10,6 +10,7 @@ import remove from '../../assets/remove.png'
 import axios from 'axios'
 import { useState } from 'react'
 import ConfirmModal from '../confirm-modal/ConfirmModal'
+import EditModal from '../edit-modal/EditModal'
 
 
 interface TableProps {
@@ -19,39 +20,57 @@ interface TableProps {
 const Table: React.FC<TableProps> = ({ data }) => {
     const [showDelModal, setShowDelModal] = useState(false)
     const [itemIdToDelete, setItemIdToDelete] = useState<number | null>(null)
+    const [showEditModal, setShowEditModal] = useState(false)
+    const [itemIdToEdit, setItemIdToEdit] = useState<number | null>(null)
 
     const openDelModal = (id: number) => {
-        setItemIdToDelete(id);
-        setShowDelModal(true);
+        setItemIdToDelete(id)
+        setShowDelModal(true)
     }
 
     const closeDelModal = () => {
-        setItemIdToDelete(null);
-        setShowDelModal(false);
+        setItemIdToDelete(null)
+        setShowDelModal(false)
+    }
+
+    const openEditModal = (id: number) => {
+        setItemIdToEdit(id)
+        setShowEditModal(true)
+    }
+
+    const closeEditModal = () => {
+        setItemIdToEdit(null)
+        setShowEditModal(false)
     }
 
     const removeItem = (id: number) => {
         console.log(`Tentando remover o item com o ID ${id}`)
         axios.delete(`http://127.0.0.1:8000/drugs/delete/${id}`)
             .then(response => {
-                console.log('Item removido com sucesso', response.data)
+                console.log('Item succesfully removed', response.data)
                 closeDelModal()
                 window.location.href = '/'
             })
-            .catch(error => {
-                console.error('Erro ao remover o item', error)
-            });
+            .catch(err => console.log(err))
     }
 
     return (
         <>
             {showDelModal && (
                 <ConfirmModal
-                    message = "Tem certeza que deseja excluir este item?"
+                    message = "Are you sure you want to delete?"
                     onConfirm = {() => {
                         removeItem(itemIdToDelete!)
                     }}
                     onCancel={closeDelModal}
+                />
+            )}
+
+            {showEditModal && (
+                <EditModal
+                    itemId={itemIdToEdit!}
+                    onClose={closeEditModal}
+                    initialData={data.find(item => item.id === itemIdToEdit)}
                 />
             )}
 
@@ -77,7 +96,9 @@ const Table: React.FC<TableProps> = ({ data }) => {
                                             <img src={edit} 
                                                  alt="Edit"
                                                  title="Edit" 
-                                                 className="icon-table" />
+                                                 className="icon-table"
+                                                 onClick={() => openEditModal(item.id)} 
+                                            />
                                             <img 
                                                 src={remove} 
                                                 alt="Remove"
@@ -105,4 +126,4 @@ const Table: React.FC<TableProps> = ({ data }) => {
     )
 }
 
-export default Table;
+export default Table
