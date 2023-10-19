@@ -1,5 +1,8 @@
 <h1>Drug Admin API</h1>
 
+- Esse projeto foi desenvolvido com a stack utilizada no meu trabalho atual. Meu objetivo foi colocar em prática meus conhecimentos de front e back adquiridos no trabalho, de maneira independente. 
+- <i>This project was developed with the stack used in my current work. My goal was to put into practice my front and back knowledge acquired at work, independently.</i>
+-----------
 - Aplicação web para gestão de estoque de medicamentos.
 - <i>Drug stock management web application</i>
 
